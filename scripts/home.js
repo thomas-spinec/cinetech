@@ -67,7 +67,6 @@ async function displaySeries() {
     options
   );
   const series = await promise.json();
-  console.log(series);
 
   let randomList = [];
   // création des index aléatoires (il ne faut pas 2 fois le même index)
@@ -87,19 +86,27 @@ async function displaySeries() {
     const serieDiv = document.createElement("div");
     serieDiv.classList.add("serie");
 
-    const serieImage = document.createElement("img");
-    serieImage.src = "https://image.tmdb.org/t/p/w500" + serie.poster_path;
-    serieImage.alt = serie.name;
-
     const serieTitle = document.createElement("h3");
     serieTitle.textContent = serie.name;
 
-    const serieDescription = document.createElement("p");
-    serieDescription.textContent = serie.overview;
-
     // mise des éléments dans le DOM
     serieDiv.appendChild(serieTitle);
-    serieDiv.appendChild(serieImage);
+    if (serie.poster_path === null) {
+      const seriewarning = document.createElement("p");
+      seriewarning.textContent = "Pas d'image disponible";
+      serieDiv.appendChild(seriewarning);
+    } else {
+      const serieImage = document.createElement("img");
+      serieImage.src = "https://image.tmdb.org/t/p/w500" + serie.poster_path;
+      serieImage.alt = serie.name;
+      serieDiv.appendChild(serieImage);
+    }
+    const serieDescription = document.createElement("p");
+    if (serie.overview === "") {
+      serieDescription.textContent = "Pas de description disponible";
+    } else {
+      serieDescription.textContent = serie.overview;
+    }
     serieDiv.appendChild(serieDescription);
     seriesSection.appendChild(serieDiv);
   }
