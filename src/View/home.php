@@ -16,11 +16,11 @@
 
     <main>
         <h2>Accueil</h2>
+        <h2>Films</h2>
         <section class="movies">
-            <h2>Films</h2>
         </section>
+        <h2>Séries</h2>
         <section class="series">
-            <h2>Séries</h2>
         </section>
     </main>
 

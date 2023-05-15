@@ -21,7 +21,7 @@ async function displayMovies() {
   const movies = await promise.json();
   //   console.log(movies);
 
-  randomList = [];
+  let randomList = [];
   // création des index aléatoires (il ne faut pas 2 fois le même index)
   for (let i = 0; i < 5; i++) {
     let randomIndex = Math.floor(Math.random() * 20);
@@ -58,5 +58,53 @@ async function displayMovies() {
   }
 }
 
+async function displaySeries() {
+  seriesSection.innerHTML = "";
+  const randomPage = Math.floor(Math.random() * 500) + 1;
+
+  const promise = await fetch(
+    "https://api.themoviedb.org/3/discover/tv?page=" + randomPage,
+    options
+  );
+  const series = await promise.json();
+  console.log(series);
+
+  let randomList = [];
+  // création des index aléatoires (il ne faut pas 2 fois le même index)
+  for (let i = 0; i < 5; i++) {
+    let randomIndex = Math.floor(Math.random() * 20);
+    if (randomList.includes(randomIndex)) {
+      i--;
+    } else {
+      randomList.push(randomIndex);
+    }
+  }
+
+  // boucle pour afficher les films
+  for (let i = 0; i < randomList.length; i++) {
+    const serie = series.results[randomList[i]];
+
+    const serieDiv = document.createElement("div");
+    serieDiv.classList.add("serie");
+
+    const serieImage = document.createElement("img");
+    serieImage.src = "https://image.tmdb.org/t/p/w500" + serie.poster_path;
+    serieImage.alt = serie.name;
+
+    const serieTitle = document.createElement("h3");
+    serieTitle.textContent = serie.name;
+
+    const serieDescription = document.createElement("p");
+    serieDescription.textContent = serie.overview;
+
+    // mise des éléments dans le DOM
+    serieDiv.appendChild(serieTitle);
+    serieDiv.appendChild(serieImage);
+    serieDiv.appendChild(serieDescription);
+    seriesSection.appendChild(serieDiv);
+  }
+}
+
 // call the functions
 displayMovies();
+displaySeries();
