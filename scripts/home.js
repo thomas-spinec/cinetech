@@ -15,7 +15,8 @@ async function displayMovies() {
   const randomPage = Math.floor(Math.random() * 500) + 1;
 
   const promise = await fetch(
-    "https://api.themoviedb.org/3/discover/movie?page=" + randomPage,
+    "https://api.themoviedb.org/3/discover/movie?include_adult=false&page=" +
+      randomPage,
     options
   );
   const movies = await promise.json();
@@ -23,7 +24,7 @@ async function displayMovies() {
 
   let randomList = [];
   // création des index aléatoires (il ne faut pas 2 fois le même index)
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 8; i++) {
     let randomIndex = Math.floor(Math.random() * 20);
     if (randomList.includes(randomIndex)) {
       i--;
@@ -41,18 +42,18 @@ async function displayMovies() {
     movieDiv.classList.add("movie");
 
     const movieImage = document.createElement("img");
-    movieImage.src = "https://image.tmdb.org/t/p/w500" + movie.poster_path;
+    movieImage.src = "https://image.tmdb.org/t/p/w400" + movie.poster_path;
     movieImage.alt = movie.title;
 
-    const movieTitle = document.createElement("h3");
+    const movieTitle = document.createElement("h4");
     movieTitle.textContent = movie.title;
 
     const movieDescription = document.createElement("p");
     movieDescription.textContent = movie.overview;
 
     // mise des éléments dans le DOM
-    movieDiv.appendChild(movieTitle);
     movieDiv.appendChild(movieImage);
+    movieDiv.appendChild(movieTitle);
     movieDiv.appendChild(movieDescription);
     moviesSection.appendChild(movieDiv);
   }
@@ -63,14 +64,15 @@ async function displaySeries() {
   const randomPage = Math.floor(Math.random() * 500) + 1;
 
   const promise = await fetch(
-    "https://api.themoviedb.org/3/discover/tv?page=" + randomPage,
+    "https://api.themoviedb.org/3/discover/tv?include_adult=false&page=" +
+      randomPage,
     options
   );
   const series = await promise.json();
 
   let randomList = [];
   // création des index aléatoires (il ne faut pas 2 fois le même index)
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 8; i++) {
     let randomIndex = Math.floor(Math.random() * 20);
     if (randomList.includes(randomIndex)) {
       i--;
@@ -90,17 +92,17 @@ async function displaySeries() {
     serieTitle.textContent = serie.name;
 
     // mise des éléments dans le DOM
-    serieDiv.appendChild(serieTitle);
     if (serie.poster_path === null) {
       const seriewarning = document.createElement("p");
       seriewarning.textContent = "Pas d'image disponible";
       serieDiv.appendChild(seriewarning);
     } else {
       const serieImage = document.createElement("img");
-      serieImage.src = "https://image.tmdb.org/t/p/w500" + serie.poster_path;
+      serieImage.src = "https://image.tmdb.org/t/p/w400" + serie.poster_path;
       serieImage.alt = serie.name;
       serieDiv.appendChild(serieImage);
     }
+    serieDiv.appendChild(serieTitle);
     const serieDescription = document.createElement("p");
     if (serie.overview === "") {
       serieDescription.textContent = "Pas de description disponible";

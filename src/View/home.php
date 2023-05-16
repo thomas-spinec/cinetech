@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script defer src="/cinetech/scripts/home.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="/cinetech/style.css">
     <title>Accueil</title>
 </head>
 
@@ -16,12 +18,17 @@
 
     <main>
         <h2>Accueil</h2>
-        <h2>Films</h2>
-        <section class="movies">
-        </section>
-        <h2>Séries</h2>
-        <section class="series">
-        </section>
+        <article id="movie_article">
+            <h2>Quelques films</h2>
+            <section class="movies">
+            </section>
+        </article>
+        <article id="series_article">
+            <h2>Quelques séries</h2>
+            <section class="series">
+            </section>
+
+        </article>
     </main>
 
 
