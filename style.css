@@ -1,0 +1,162 @@
+/* ******************************************************************** */
+/* General Styles */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #222;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+}
+
+main {
+  width: 80vw;
+  margin: auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Raleway", sans-serif;
+  font-weight: 400;
+  margin: 0 0 20px 0;
+  padding: 0;
+}
+
+p {
+  margin: 0 0 20px 0;
+  line-height: 1.6;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  list-style: none;
+}
+
+/* Typography */
+
+h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 30px;
+}
+
+h2 {
+  font-size: 2.5rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+  margin-bottom: 30px;
+}
+
+h3 {
+  font-size: 2rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+  margin-bottom: 30px;
+}
+
+h4 {
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+  margin-bottom: 30px;
+}
+
+h5 {
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+  margin-bottom: 30px;
+}
+
+h6 {
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 1px;
+  margin-bottom: 30px;
+}
+
+/* Links */
+
+a {
+  color: #222;
+  text-decoration: none;
+}
+
+/* Buttons */
+
+.btn {
+  display: inline-block;
+  border-radius: 50px;
+  background: #222;
+  color: #fff;
+  padding: 10px 30px;
+  transition: background 0.5s;
+}
+
+.btn:hover,
+.btn:active,
+.btn:focus {
+  background: #111;
+  outline: none;
+}
+
+/* ******************************************************************** */
+/* Home Section */
+
+/* faire un carrousselle avec la section movies */
+
+#movie_article,
+#series_article {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.movies,
+.series {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: auto;
+  justify-content: start;
+  align-self: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 30px;
+  max-width: 100%;
+}
+
+.movie,
+.serie {
+  width: 80%;
+  /* height: auto; */
+  margin-right: 10px;
+  border: 1px solid #222;
+}
+
+.movie h4,
+.serie h4 {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.movie p,
+.serie p {
+  padding: 10px 10px;
+}
