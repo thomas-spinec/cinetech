@@ -10,6 +10,10 @@ $router->addRoutes([
     ['GET', '/', function () {
         require __DIR__ . '/src/View/home.php';
     }, 'home'],
+    // map movies
+    ['GET', '/movies', function () {
+        require __DIR__ . '/src/View/movies.php';
+    }, 'movies'],
 ]);
 
 

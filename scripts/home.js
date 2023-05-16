@@ -15,7 +15,7 @@ async function displayMovies() {
   const randomPage = Math.floor(Math.random() * 500) + 1;
 
   const promise = await fetch(
-    "https://api.themoviedb.org/3/discover/movie?include_adult=false&page=" +
+    "https://api.themoviedb.org/3/discover/movie?include_adult=false&language=fr&page=" +
       randomPage,
     options
   );
@@ -64,7 +64,7 @@ async function displaySeries() {
   const randomPage = Math.floor(Math.random() * 500) + 1;
 
   const promise = await fetch(
-    "https://api.themoviedb.org/3/discover/tv?include_adult=false&page=" +
+    "https://api.themoviedb.org/3/discover/tv?include_adult=false&language=fr&page=" +
       randomPage,
     options
   );
