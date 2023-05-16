@@ -121,8 +121,6 @@ a {
 /* ******************************************************************** */
 /* Home Section */
 
-/* faire un carrousselle avec la section movies */
-
 #movie_article,
 #series_article {
   display: flex;
