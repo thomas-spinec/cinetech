@@ -136,18 +136,30 @@ a {
   align-items: flex-start;
 }
 
+/* select */
+#genre {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #222;
+  border-radius: 5px;
+}
+
 .pagination {
   width: 100%;
   margin: auto;
   text-align: center;
 }
 
-.pagination * {
-  /* display: inline-block; */
+.pagination button {
   padding: 8px 16px;
   margin: 2%;
   color: #000;
   cursor: pointer;
+}
+
+.pagination .disabled {
+  color: #aaa;
+  cursor: not-allowed;
 }
 
 .movies,

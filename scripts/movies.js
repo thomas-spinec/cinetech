@@ -131,8 +131,14 @@ async function displayMovies(genreId = null, page = 1) {
   previous.dataset.page = movies.page;
   if (movies.page === 1) {
     previous.disabled = true;
+    previous.classList.add("disabled");
   }
   pagination.appendChild(previous);
+
+  /* numéro de la page en cours */
+  const currentPage = document.createElement("span");
+  currentPage.textContent = movies.page;
+  pagination.appendChild(currentPage);
 
   const next = document.createElement("button");
   next.textContent = "Suivant";
@@ -140,6 +146,7 @@ async function displayMovies(genreId = null, page = 1) {
   next.dataset.page = movies.page;
   if (movies.page === movies.total_pages) {
     next.disabled = true;
+    next.classList.add("disabled");
   }
   pagination.appendChild(next);
 
