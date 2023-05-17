@@ -93,9 +93,10 @@ async function displaySeries() {
 
     // mise des éléments dans le DOM
     if (serie.poster_path === null) {
-      const seriewarning = document.createElement("p");
-      seriewarning.textContent = "Pas d'image disponible";
-      serieDiv.appendChild(seriewarning);
+      const serieImage = document.createElement("img");
+      serieImage.src = "/cinetech/img/fake-img.jpg";
+      serieImage.alt = serie.name;
+      serieDiv.appendChild(serieImage);
     } else {
       const serieImage = document.createElement("img");
       serieImage.src = "https://image.tmdb.org/t/p/w400" + serie.poster_path;

@@ -26,7 +26,7 @@
         <article id="movies_by_genre">
             <h2>Quelques films</h2>
             <select name="genre" id="genre"></select>
-            <section class="movies">
+            <section class="moviesWrap">
             </section>
         </article>
     </main>

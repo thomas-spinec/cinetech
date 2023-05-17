@@ -128,16 +128,57 @@ a {
   justify-content: center;
 }
 
+#movies_by_genre,
+#series_by_genre {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: flex-start;
+}
+
+.pagination {
+  width: 100%;
+  margin: auto;
+  text-align: center;
+}
+
+.pagination * {
+  /* display: inline-block; */
+  padding: 8px 16px;
+  margin: 2%;
+  color: #000;
+  cursor: pointer;
+}
+
 .movies,
 .series {
   display: flex;
-  flex-wrap: nowrap;
+  /* flex-wrap: nowrap; */
   overflow: auto;
   justify-content: start;
   align-self: center;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   margin-bottom: 30px;
   max-width: 100%;
+}
+
+.moviesWrap,
+.seriesWrap {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-self: center;
+  margin: 0 10px;
+  max-width: 100%;
+}
+
+.moviesWrap .movie,
+.seriesWrap .serie {
+  width: 30%;
+  margin: 10px;
+  border: 1px solid #222;
+  /* centrer les images */
+  text-align: center;
 }
 
 .movie,
@@ -148,13 +189,20 @@ a {
   border: 1px solid #222;
 }
 
+.movie p,
+.serie p {
+  padding: 10px 10px;
+  text-align: justify;
+}
+
+.movie img,
+.serie img {
+  height: 400px;
+  /* width: 100%; */
+}
+
 .movie h4,
 .serie h4 {
   text-align: center;
   margin: 10px 0;
-}
-
-.movie p,
-.serie p {
-  padding: 10px 10px;
 }
