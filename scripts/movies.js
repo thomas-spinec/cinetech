@@ -151,9 +151,6 @@ async function displayMovies(genreId = null, page = 1) {
   pagination.appendChild(next);
 
   Movies.appendChild(pagination);
-
-  // revenir en haut de la div qui porte l'id movies_by_genre
-  allMoviesArticle.scrollIntoView();
 }
 
 // appel des fonctions
@@ -169,9 +166,15 @@ allMoviesArticle.addEventListener("click", (e) => {
   e.preventDefault();
   if (e.target.classList.contains("previous")) {
     const page = parseInt(e.target.dataset.page) - 1;
-    displayMovies(selectGenre.value, page);
+    displayMovies(selectGenre.value, page).then(() => {
+      // revenir en haut de la div qui porte l'id movies_by_genre
+      allMoviesArticle.scrollIntoView();
+    });
   } else if (e.target.classList.contains("next")) {
     const page = parseInt(e.target.dataset.page) + 1;
-    displayMovies(selectGenre.value, page);
+    displayMovies(selectGenre.value, page).then(() => {
+      // revenir en haut de la div qui porte l'id movies_by_genre
+      allMoviesArticle.scrollIntoView();
+    });
   }
 });

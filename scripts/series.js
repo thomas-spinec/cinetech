@@ -151,9 +151,6 @@ async function displaySeries(genreId = null, page = 1) {
   pagination.appendChild(next);
 
   Series.appendChild(pagination);
-
-  // revenir en haut de la div qui porte l'id series_by_genre
-  allSeriesArticle.scrollIntoView();
 }
 
 // appel des fonctions
@@ -169,9 +166,15 @@ allSeriesArticle.addEventListener("click", (e) => {
   e.preventDefault();
   if (e.target.classList.contains("previous")) {
     const page = parseInt(e.target.dataset.page) - 1;
-    displaySeries(selectGenre.value, page);
+    displaySeries(selectGenre.value, page).then(() => {
+      // revenir en haut de la div qui porte l'id series_by_genre
+      allSeriesArticle.scrollIntoView();
+    });
   } else if (e.target.classList.contains("next")) {
     const page = parseInt(e.target.dataset.page) + 1;
-    displaySeries(selectGenre.value, page);
+    displaySeries(selectGenre.value, page).then(() => {
+      // revenir en haut de la div qui porte l'id series_by_genre
+      allSeriesArticle.scrollIntoView();
+    });
   }
 });
