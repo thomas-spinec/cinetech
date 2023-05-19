@@ -151,6 +151,9 @@ async function displayMovies(genreId = null, page = 1) {
   pagination.appendChild(next);
 
   Movies.appendChild(pagination);
+
+  // revenir en haut de la div qui porte l'id movies_by_genre
+  allMoviesArticle.scrollIntoView();
 }
 
 // appel des fonctions
