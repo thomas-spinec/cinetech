@@ -25,6 +25,9 @@ async function displayWeekSeries() {
   for (let serie of series.results) {
     const serieDiv = document.createElement("div");
     serieDiv.classList.add("serie");
+    const serieLink = document.createElement("a");
+    serieLink.href = "/cinetech/serie/" + serie.id;
+
     const serieImage = document.createElement("img");
     if (serie.poster_path === null) {
       serieImage.src = "/cinetech/img/fake-img.jpg";
@@ -33,7 +36,8 @@ async function displayWeekSeries() {
       serieImage.src = "https://image.tmdb.org/t/p/w400" + serie.poster_path;
       serieImage.alt = serie.name;
     }
-    serieDiv.appendChild(serieImage);
+    serieLink.appendChild(serieImage);
+    serieDiv.appendChild(serieLink);
 
     const serieTitle = document.createElement("h4");
     serieTitle.textContent = serie.name;
@@ -96,6 +100,8 @@ async function displaySeries(genreId = null, page = 1) {
     const serieDiv = document.createElement("div");
     serieDiv.classList.add("serie");
 
+    const serieLink = document.createElement("a");
+    serieLink.href = "/cinetech/serie/" + serie.id;
     const serieImage = document.createElement("img");
     if (serie.poster_path === null) {
       serieImage.src = "/cinetech/img/fake-img.jpg";
@@ -104,7 +110,8 @@ async function displaySeries(genreId = null, page = 1) {
       serieImage.src = "https://image.tmdb.org/t/p/w400" + serie.poster_path;
       serieImage.alt = serie.name;
     }
-    serieDiv.appendChild(serieImage);
+    serieLink.appendChild(serieImage);
+    serieDiv.appendChild(serieLink);
 
     const serieTitle = document.createElement("h4");
     serieTitle.textContent = serie.name;
@@ -163,14 +170,15 @@ selectGenre.addEventListener("change", (e) => {
 });
 
 allSeriesArticle.addEventListener("click", (e) => {
-  e.preventDefault();
   if (e.target.classList.contains("previous")) {
+    e.preventDefault();
     const page = parseInt(e.target.dataset.page) - 1;
     displaySeries(selectGenre.value, page).then(() => {
       // revenir en haut de la div qui porte l'id series_by_genre
       allSeriesArticle.scrollIntoView();
     });
   } else if (e.target.classList.contains("next")) {
+    e.preventDefault();
     const page = parseInt(e.target.dataset.page) + 1;
     displaySeries(selectGenre.value, page).then(() => {
       // revenir en haut de la div qui porte l'id series_by_genre
