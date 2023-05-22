@@ -20,10 +20,12 @@ async function displayMovie() {
   );
   const movie = await promise.json();
 
+  // TITLE -------------------------
   const movieTitle = document.createElement("h2");
   movieTitle.textContent = movie.title;
   movieArticle.appendChild(movieTitle);
 
+  // IMAGE -------------------------
   const movieImage = document.createElement("img");
   if (movie.poster_path === null) {
     movieImage.src = "/cinetech/img/fake-img.jpg";
@@ -34,6 +36,7 @@ async function displayMovie() {
   }
   movieArticle.appendChild(movieImage);
 
+  // DESCRIPTION -------------------------
   const movieDescription = document.createElement("p");
   if (movie.overview === "") {
     movieDescription.textContent = "Pas de description disponible";
@@ -42,6 +45,7 @@ async function displayMovie() {
   }
   movieArticle.appendChild(movieDescription);
 
+  // GENRES -------------------------
   const movieGenres = document.createElement("p");
   movieGenres.textContent = "Genres : ";
   for (let genre of movie.genres) {
@@ -49,6 +53,7 @@ async function displayMovie() {
   }
   movieArticle.appendChild(movieGenres);
 
+  // DATE -------------------------
   const movieDate = document.createElement("p");
   // changer le format de la date avec le mois avec 2 chiffres
   let date = new Date(movie.release_date);
@@ -64,15 +69,23 @@ async function displayMovie() {
   movieDate.textContent = "Sortie : " + movie.release_date;
   movieArticle.appendChild(movieDate);
 
+  // DURATION -------------------------
   const movieDuration = document.createElement("p");
   movieDuration.textContent = "Durée : " + movie.runtime + " minutes";
   movieArticle.appendChild(movieDuration);
 
+  // DIRECTOR -------------------------
   const movieDirector = document.createElement("p");
-  movieDirector.textContent = "Réalisateur : " + movie.credits.crew[0].name;
+  movieDirector.textContent = "Réalisateur : ";
+  for (let crew of movie.credits.crew) {
+    if (crew.job === "Director") {
+      movieDirector.textContent += crew.name + ", ";
+    }
+  }
+
   movieArticle.appendChild(movieDirector);
 
-  // pays de production
+  // COUNTRIES -------------------------
   const movieCountries = document.createElement("p");
   movieCountries.textContent = "Pays de production : ";
   for (let country of movie.production_countries) {
@@ -80,6 +93,7 @@ async function displayMovie() {
   }
   movieArticle.appendChild(movieCountries);
 
+  // CAST -------------------------
   const movieCast = document.createElement("p");
   movieCast.textContent = "Avec : ";
   for (let actor of movie.credits.cast) {
