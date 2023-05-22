@@ -25,6 +25,9 @@ async function displayWeekMovies() {
   for (let movie of movies.results) {
     const movieDiv = document.createElement("div");
     movieDiv.classList.add("movie");
+
+    const movieLink = document.createElement("a");
+    movieLink.href = "/cinetech/movie/" + movie.id;
     const movieImage = document.createElement("img");
     if (movie.poster_path === null) {
       movieImage.src = "/cinetech/img/fake-img.jpg";
@@ -33,7 +36,8 @@ async function displayWeekMovies() {
       movieImage.src = "https://image.tmdb.org/t/p/w400" + movie.poster_path;
       movieImage.alt = movie.title;
     }
-    movieDiv.appendChild(movieImage);
+    movieLink.appendChild(movieImage);
+    movieDiv.appendChild(movieLink);
 
     const movieTitle = document.createElement("h4");
     movieTitle.textContent = movie.title;
@@ -96,6 +100,8 @@ async function displayMovies(genreId = null, page = 1) {
     const movieDiv = document.createElement("div");
     movieDiv.classList.add("movie");
 
+    const movieLink = document.createElement("a");
+    movieLink.href = "/cinetech/movie/" + movie.id;
     const movieImage = document.createElement("img");
     if (movie.poster_path === null) {
       movieImage.src = "/cinetech/img/fake-img.jpg";
@@ -104,7 +110,8 @@ async function displayMovies(genreId = null, page = 1) {
       movieImage.src = "https://image.tmdb.org/t/p/w400" + movie.poster_path;
       movieImage.alt = movie.title;
     }
-    movieDiv.appendChild(movieImage);
+    movieLink.appendChild(movieImage);
+    movieDiv.appendChild(movieLink);
 
     const movieTitle = document.createElement("h4");
     movieTitle.textContent = movie.title;
@@ -163,14 +170,15 @@ selectGenre.addEventListener("change", (e) => {
 });
 
 allMoviesArticle.addEventListener("click", (e) => {
-  e.preventDefault();
   if (e.target.classList.contains("previous")) {
+    e.preventDefault();
     const page = parseInt(e.target.dataset.page) - 1;
     displayMovies(selectGenre.value, page).then(() => {
       // revenir en haut de la div qui porte l'id movies_by_genre
       allMoviesArticle.scrollIntoView();
     });
   } else if (e.target.classList.contains("next")) {
+    e.preventDefault();
     const page = parseInt(e.target.dataset.page) + 1;
     displayMovies(selectGenre.value, page).then(() => {
       // revenir en haut de la div qui porte l'id movies_by_genre
