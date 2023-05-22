@@ -41,9 +41,17 @@ async function displayMovies() {
     const movieDiv = document.createElement("div");
     movieDiv.classList.add("movie");
 
+    const movieLink = document.createElement("a");
+    movieLink.href = "/cinetech/movie/" + movie.id;
     const movieImage = document.createElement("img");
-    movieImage.src = "https://image.tmdb.org/t/p/w400" + movie.poster_path;
-    movieImage.alt = movie.title;
+    if (movie.poster_path === null) {
+      movieImage.src = "/cinetech/img/fake-img.jpg";
+      movieImage.alt = movie.name;
+    } else {
+      movieImage.src = "https://image.tmdb.org/t/p/w400" + movie.poster_path;
+      movieImage.alt = movie.title;
+    }
+    movieLink.appendChild(movieImage);
 
     const movieTitle = document.createElement("h4");
     movieTitle.textContent = movie.title;
@@ -52,7 +60,7 @@ async function displayMovies() {
     movieDescription.textContent = movie.overview;
 
     // mise des éléments dans le DOM
-    movieDiv.appendChild(movieImage);
+    movieDiv.appendChild(movieLink);
     movieDiv.appendChild(movieTitle);
     movieDiv.appendChild(movieDescription);
     moviesSection.appendChild(movieDiv);
@@ -91,18 +99,19 @@ async function displaySeries() {
     const serieTitle = document.createElement("h3");
     serieTitle.textContent = serie.name;
 
-    // mise des éléments dans le DOM
+    const serieLink = document.createElement("a");
+    serieLink.href = "/cinetech/serie/" + serie.id;
+    const serieImage = document.createElement("img");
     if (serie.poster_path === null) {
-      const serieImage = document.createElement("img");
       serieImage.src = "/cinetech/img/fake-img.jpg";
       serieImage.alt = serie.name;
-      serieDiv.appendChild(serieImage);
     } else {
-      const serieImage = document.createElement("img");
       serieImage.src = "https://image.tmdb.org/t/p/w400" + serie.poster_path;
       serieImage.alt = serie.name;
-      serieDiv.appendChild(serieImage);
     }
+    serieLink.appendChild(serieImage);
+    serieDiv.appendChild(serieLink);
+
     serieDiv.appendChild(serieTitle);
     const serieDescription = document.createElement("p");
     if (serie.overview === "") {
