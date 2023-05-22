@@ -1,5 +1,6 @@
 const movieArticle = document.querySelector("#movie");
 const movieId = window.location.pathname.split("/").pop();
+const commentArticle = document.querySelector("#comments");
 const similarMovies = document.querySelector(".movies");
 
 const options = {
@@ -144,5 +145,40 @@ async function displaySimilarMovies() {
   }
 }
 
+async function displayComments() {
+  const promise = await fetch(
+    "https://api.themoviedb.org/3/movie/" + movieId + "/reviews?language=fr-FR",
+    options
+  );
+  const comments = await promise.json();
+
+  // si il n'y a pas de commentaires
+  if (comments.results.length === 0) {
+    const noComments = document.createElement("h4");
+    noComments.textContent = "Pas de commentaires";
+    commentArticle.appendChild(noComments);
+    // on arrête la fonction
+    return;
+  }
+
+  for (let comment of comments.results) {
+    const commentDiv = document.createElement("div");
+    commentDiv.classList.add("comment");
+
+    const commentAuthor = document.createElement("h4");
+    commentAuthor.textContent = comment.author;
+    commentDiv.appendChild(commentAuthor);
+
+    const commentContent = document.createElement("p");
+    commentContent.textContent = comment.content;
+    commentDiv.appendChild(commentContent);
+
+    // mise des éléments dans le DOM
+
+    commentArticle.appendChild(commentDiv);
+  }
+}
+
 displayMovie();
 displaySimilarMovies();
+displayComments();

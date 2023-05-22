@@ -22,6 +22,10 @@ $router->addRoutes([
     ['GET', '/movie/[i:id]', function ($id) {
         require __DIR__ . '/src/View/movie.php';
     }, 'movie'],
+    // map serie
+    ['GET', '/serie/[i:id]', function ($id) {
+        require __DIR__ . '/src/View/serie.php';
+    }, 'serie'],
 ]);
 
 

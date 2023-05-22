@@ -8,8 +8,8 @@
     <!-- CSS -->
     <link rel="stylesheet" href="/cinetech/style.css">
     <!-- script -->
-    <script defer src="/cinetech/scripts/detailMovie.js"></script>
-    <title>Movie</title>
+    <script defer src="/cinetech/scripts/detailSerie.js"></script>
+    <title>Serie</title>
 </head>
 
 <body>
@@ -18,14 +18,14 @@
     </header>
 
     <main>
-        <article id="movie">
+        <article id="serie">
         </article>
 
         <article id="comments"></article>
 
-        <article id="movies_week">
-            <h2>Les films similaires</h2>
-            <section class="movies">
+        <article id="series_week">
+            <h2>Les séries similaires</h2>
+            <section class="series">
         </article>
     </main>
 
