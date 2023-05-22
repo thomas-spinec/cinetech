@@ -21,6 +21,8 @@
         <article id="serie">
         </article>
 
+        <article id="comments"></article>
+
         <article id="series_week">
             <h2>Les séries similaires</h2>
             <section class="series">

@@ -21,6 +21,8 @@
         <article id="movie">
         </article>
 
+        <article id="comments"></article>
+
         <article id="movies_week">
             <h2>Les films similaires</h2>
             <section class="movies">

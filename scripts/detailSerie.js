@@ -1,5 +1,6 @@
 const serieArticle = document.querySelector("#serie");
 const serieId = window.location.pathname.split("/").pop();
+const commentArticle = document.querySelector("#comments");
 const similarSeries = document.querySelector(".series");
 
 const options = {
@@ -71,11 +72,9 @@ async function displaySerie() {
 
   // DIRECTOR -------------------------
   const serieDirector = document.createElement("p");
-  serieDirector.textContent = "Créateur : ";
-  for (let crew of serie.credits.crew) {
-    if (crew.job === "Creator") {
-      serieDirector.textContent += crew.name + ", ";
-    }
+  serieDirector.textContent = "Créateur(s) : ";
+  for (let creator of serie.created_by) {
+    serieDirector.textContent += creator.name + ", ";
   }
 
   // COUNTRIES -------------------------
@@ -156,6 +155,41 @@ async function displaySimilarSeries() {
   }
 }
 
+async function displayComments() {
+  const promise = await fetch(
+    "https://api.themoviedb.org/3/tv/" + serieId + "/reviews?language=fr-FR",
+    options
+  );
+  const comments = await promise.json();
+
+  // si il n'y a pas de commentaires
+  if (comments.results.length === 0) {
+    const noComments = document.createElement("h4");
+    noComments.textContent = "Pas de commentaires";
+    commentArticle.appendChild(noComments);
+    // on arrête la fonction
+    return;
+  }
+
+  for (let comment of comments.results) {
+    const commentDiv = document.createElement("div");
+    commentDiv.classList.add("comment");
+
+    const commentAuthor = document.createElement("h4");
+    commentAuthor.textContent = comment.author;
+    commentDiv.appendChild(commentAuthor);
+
+    const commentContent = document.createElement("p");
+    commentContent.textContent = comment.content;
+    commentDiv.appendChild(commentContent);
+
+    // mise des éléments dans le DOM
+
+    commentArticle.appendChild(commentDiv);
+  }
+}
+
 // call the functions
 displaySerie();
 displaySimilarSeries();
+displayComments();
