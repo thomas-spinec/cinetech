@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- CSS -->
     <link rel="stylesheet" href="/cinetech/style.css">
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/1a481da37a.js" crossorigin="anonymous"></script>
     <!-- script -->
     <script defer src="/cinetech/scripts/detailMovie.js"></script>
     <title>Movie</title>
@@ -14,7 +16,7 @@
 
 <body>
     <header>
-        <h1>cinetech</h1>
+        <?php require_once 'includes/header.php'; ?>
     </header>
 
     <main>
