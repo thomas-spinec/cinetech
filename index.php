@@ -1,4 +1,8 @@
 <?php
+session_start();
+
+use App\Controller\AuthController;
+
 require 'vendor/autoload.php';
 
 
@@ -26,6 +30,16 @@ $router->addRoutes([
     ['GET', '/serie/[i:id]', function ($id) {
         require __DIR__ . '/src/View/serie.php';
     }, 'serie'],
+    // map register
+    ['GET', '/register', function () {
+        $authController = new AuthController();
+        $authController->DisplayRegister();
+    }, 'register'],
+    // map register Post
+    ['POST', '/register', function () {
+        $authController = new AuthController();
+        $authController->register();
+    }, 'registerPost'],
 ]);
 
 

@@ -143,6 +143,7 @@ a:hover {
 
 /* animation de l'icone permettant d'ouvrir le pop up */
 .auth:hover,
+#closePop:hover,
 .icons #burger:hover,
 .icons #close:hover {
   transform: scale(1.1);
@@ -164,6 +165,10 @@ a:hover {
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.69);
+}
+
+#closePop {
+  cursor: pointer;
 }
 
 .hidden {
@@ -341,17 +346,17 @@ a:hover {
 
   /* animation de la fermeture du menu */
   #nav.close {
-    animation: slideOut 0.5s forwards;
+    transform: translateX(-100%);
   }
 
-  @keyframes slideOut {
+  /* @keyframes slideOut {
     0% {
       transform: translateX(0);
     }
     100% {
       transform: translateX(-100%);
     }
-  }
+  } */
 }
 
 /* Home Section */

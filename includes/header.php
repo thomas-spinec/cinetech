@@ -1,7 +1,3 @@
-<?php
-session_start();
-?>
-
 <section id="topHead">
     <a href="/cinetech/">
         <h1>Cinetech</h1>
@@ -48,8 +44,8 @@ session_start();
                 <a href="/cinetech/profil">Profil</a>
                 <a href="/cinetech/logout">Déconnexion</a>
             <?php else : ?>
-                <a href="/cinetech/connexion">Connexion</a>
-                <a href="/cinetech/inscription">Inscription</a>
+                <a href="/cinetech/connection">Connexion</a>
+                <a href="/cinetech/register">Inscription</a>
             <?php endif; ?>
         </div>
     </div>
