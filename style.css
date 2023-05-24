@@ -31,7 +31,7 @@ h5,
 h6 {
   font-family: "Raleway", sans-serif;
   font-weight: 400;
-  margin: 0 0 20px 0;
+  /* margin: 0 0 20px 0; */
   padding: 0;
 }
 
@@ -55,42 +55,36 @@ h1 {
   font-size: 3rem;
   font-weight: 700;
   letter-spacing: 1px;
-  margin-bottom: 30px;
 }
 
 h2 {
   font-size: 2.5rem;
   font-weight: 400;
   letter-spacing: 1px;
-  margin-bottom: 30px;
 }
 
 h3 {
   font-size: 2rem;
   font-weight: 400;
   letter-spacing: 1px;
-  margin-bottom: 30px;
 }
 
 h4 {
   font-size: 1.5rem;
   font-weight: 400;
   letter-spacing: 1px;
-  margin-bottom: 30px;
 }
 
 h5 {
   font-size: 1.2rem;
   font-weight: 400;
   letter-spacing: 1px;
-  margin-bottom: 30px;
 }
 
 h6 {
   font-size: 1rem;
   font-weight: 400;
   letter-spacing: 1px;
-  margin-bottom: 30px;
 }
 
 /* Links */
@@ -98,6 +92,12 @@ h6 {
 a {
   color: #222;
   text-decoration: none;
+  transform: text-decoration 0.5s;
+}
+
+/* souligner les liens au survol */
+a:hover {
+  text-decoration: underline;
 }
 
 /* Buttons */
@@ -119,6 +119,241 @@ a {
 }
 
 /* ******************************************************************** */
+
+/* Header Section */
+#topHead {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  align-self: center;
+}
+
+#topHead i,
+#topHead a {
+  margin-right: 10px;
+  font-size: 1.5rem;
+}
+
+.auth,
+#burger,
+#close {
+  cursor: pointer;
+  transition: transform 0.5s;
+}
+
+/* animation de l'icone permettant d'ouvrir le pop up */
+.auth:hover,
+.icons #burger:hover,
+.icons #close:hover {
+  transform: scale(1.1);
+}
+
+#nav,
+#burger,
+#close {
+  display: none;
+}
+
+/* pop up */
+#authSection {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.69);
+}
+
+.hidden {
+  display: none !important;
+}
+
+#pop {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* width: 80%; */
+  /* height: 80%; */
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+#popContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#popContent a,
+#popContent i {
+  margin: 10px 0;
+  font-size: 1.2rem;
+}
+
+/* bar de recherche */
+#research {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
+
+#research input {
+  padding: 10px;
+  border: 1px solid #222;
+  border-radius: 5px;
+}
+
+#research button {
+  padding: 10px;
+  margin-left: 10px;
+  border: 1px solid #222;
+  border-radius: 5px;
+  background: #222;
+  color: #fff;
+  cursor: pointer;
+}
+
+#results {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: #f0f0f0;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 15px;
+}
+
+@media all and (max-width: 768px) {
+  /* #topHead {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: center;
+  } */
+
+  #topHead i,
+  #topHead a {
+    margin-right: 10px;
+    font-size: 1.5rem;
+  }
+
+  #topHead {
+    transition: all ease 0.5s;
+  }
+
+  .desktop {
+    display: none;
+  }
+
+  #burger,
+  #close {
+    display: block;
+  }
+
+  #nav {
+    display: flex;
+    position: fixed;
+    top: 9vh;
+    left: 0;
+    z-index: 1000;
+    width: 100vw;
+    height: 20vh;
+    background: rgba(0, 0, 0, 0.69);
+    justify-content: center;
+  }
+
+  #nav nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  #nav a {
+    color: #fff;
+    font-size: 1.5rem;
+  }
+
+  .icons {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin: 0 2.3rem 0 0; */
+    width: 1.25rem;
+    height: 2.6rem;
+  }
+
+  .icons #burger,
+  .icons #close {
+    position: absolute;
+    /* top: 0; */
+    left: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    transition: transform 0.5s, opacity 0.5s;
+  }
+
+  #close {
+    opacity: 0;
+    transform: rotate(90deg);
+  }
+
+  #burger {
+    transform: rotate(0deg);
+    opacity: 1;
+  }
+
+  /* changement d'icone */
+  #burger.open {
+    transform: rotate(90deg);
+    opacity: 0;
+  }
+
+  #close.open {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+
+  /* animation de l'ouverture du menu */
+  #nav.open {
+    animation: slideIn 0.5s forwards;
+  }
+
+  @keyframes slideIn {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  /* animation de la fermeture du menu */
+  #nav.close {
+    animation: slideOut 0.5s forwards;
+  }
+
+  @keyframes slideOut {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+}
+
 /* Home Section */
 
 #movie_article,
