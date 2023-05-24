@@ -195,6 +195,42 @@ a:hover {
   font-size: 1.2rem;
 }
 
+/* bar de recherche */
+#research {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
+
+#research input {
+  padding: 10px;
+  border: 1px solid #222;
+  border-radius: 5px;
+}
+
+#research button {
+  padding: 10px;
+  margin-left: 10px;
+  border: 1px solid #222;
+  border-radius: 5px;
+  background: #222;
+  color: #fff;
+  cursor: pointer;
+}
+
+#results {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: #f0f0f0;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 15px;
+}
+
 @media all and (max-width: 768px) {
   /* #topHead {
     display: flex;

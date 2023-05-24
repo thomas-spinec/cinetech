@@ -12,6 +12,7 @@
     <!-- JS -->
     <script defer src="/cinetech/scripts/home.js"></script>
     <script defer src="/cinetech/scripts/menu.js"></script>
+    <script defer src="/cinetech/scripts/research.js"></script>
     <title>Accueil</title>
 </head>
 

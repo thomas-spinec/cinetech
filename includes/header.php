@@ -20,6 +20,14 @@ session_start();
     <a href="/cinetech/series" class="desktop">Séries</a>
 </section>
 
+<section id="research">
+    <form action="/cinetech/search" method="GET">
+        <input type="text" name="search" id="search" placeholder="Rechercher" autocomplete="off">
+        <button type="submit"><i class="fa-solid fa-search"></i></button>
+    </form>
+    <div id="results"></div>
+</section>
+
 <section id="nav" class="close">
     <nav>
         <ul>

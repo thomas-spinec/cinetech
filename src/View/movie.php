@@ -11,6 +11,8 @@
     <script src="https://kit.fontawesome.com/1a481da37a.js" crossorigin="anonymous"></script>
     <!-- script -->
     <script defer src="/cinetech/scripts/detailMovie.js"></script>
+    <script defer src="/cinetech/scripts/menu.js"></script>
+    <script defer src="/cinetech/scripts/research.js"></script>
     <title>Movie</title>
 </head>
 
