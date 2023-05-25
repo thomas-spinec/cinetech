@@ -40,6 +40,21 @@ $router->addRoutes([
         $authController = new AuthController();
         $authController->register();
     }, 'registerPost'],
+    // map login
+    ['GET', '/login', function () {
+        $authController = new AuthController();
+        $authController->DisplayLogin();
+    }, 'login'],
+    // map login Post
+    ['POST', '/login', function () {
+        $authController = new AuthController();
+        $authController->login();
+    }, 'loginPost'],
+    // map logout
+    ['GET', '/logout', function () {
+        $authController = new AuthController();
+        $authController->logout();
+    }, 'logout'],
 ]);
 
 

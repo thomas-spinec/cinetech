@@ -66,7 +66,7 @@ inputPassword2.addEventListener("blur", function () {
 });
 
 // si champs n'est pas vide on empêche l'envoi du formulaire
-formInsc.addEventListener("submit", function (e) {
+formInsc.addEventListener("submit", async function (e) {
   if (champs.length > 0) {
     e.preventDefault();
   }

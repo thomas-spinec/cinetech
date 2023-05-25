@@ -12,8 +12,8 @@
     <!-- script -->
     <script defer src="/cinetech/scripts/menu.js"></script>
     <script defer src="/cinetech/scripts/research.js"></script>
-    <script defer src="/cinetech/scripts/register.js"></script>
-    <title>Inscription</title>
+    <script defer src="/cinetech/scripts/login.js"></script>
+    <title>Connexion</title>
 </head>
 
 <body>
@@ -23,9 +23,9 @@
     </header>
 
     <main>
-        <h2>Inscription</h2>
+        <h2>Connexion</h2>
 
-        <h4>Vous avez déjà un compte? <a href="/cinetech/login">Cliquez ici</a>!</h4>
+        <h4>Pas encore membre? <a href="/cinetech/register">Cliquez ici</a>!</h4>
 
         <?php if (isset($_SESSION['flash'])) : ?>
             <?php foreach ($_SESSION['flash'] as $type => $message) : ?>
@@ -35,17 +35,9 @@
             <?php endforeach; ?>
             <?php unset($_SESSION['flash']); ?>
         <?php endif; ?>
-        <form method="POST" id="formInsc" class="forms">
-            <div>
-                <label for="name">Prénom</label>
-                <input type="text" name="name" id="name" required>
-                <p></p>
-            </div>
-            <div>
-                <label for="lastname">Nom</label>
-                <input type="text" name="lastname" id="lastname" required>
-                <p></p>
-            </div>
+
+        <!-- FORM -->
+        <form method="POST" id="formLogin" class="forms">
             <div>
                 <label for="email">Email</label>
                 <input type="email" name="email" id="email" required>
@@ -57,16 +49,12 @@
                 <p></p>
             </div>
             <div>
-                <label for="password_confirm">Confirmer le mot de passe</label>
-                <input type="password" name="password_confirm" id="password_confirm" required>
-                <p></p>
-            </div>
-            <div>
-                <input type="submit" value="S'inscrire">
+                <input type="submit" value="Connexion">
             </div>
         </form>
         <p></p>
     </main>
+
 
 </body>
 

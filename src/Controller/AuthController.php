@@ -57,7 +57,7 @@ class AuthController
         }
         // vérification si l'email existe déjà
         $user = new \App\Model\UserModel();
-        $userDispo = $user->findBy(['email' => $_POST['email']]);
+        $userDispo = $user->findBy(['email' => htmlspecialchars($_POST['email'])]);
         if ($userDispo) {
             $_SESSION['flash']['error'] = 'Email déjà utilisé';
             require_once __DIR__ . '/../View/register.php';
@@ -74,16 +74,41 @@ class AuthController
         $user->register($params);
         // si l'inscription s'est bien passée on redirige vers la page de connexion après avoir affiché un message
         if (isset($_SESSION['flash']['success'])) {
-            header('Location: /cinetech/connection');
+            header('Location: /cinetech/login');
         } else {
             require_once __DIR__ . '/../View/register.php';
         }
     }
 
-    public function loginPost()
+    public function login()
     {
+        // vérification des données
+        if (empty($_POST['email']) || empty($_POST['password'])) {
+            $_SESSION['flash']['error'] = 'Tous les champs sont obligatoires';
+            require_once __DIR__ . '/../View/login.php';
+            return;
+        } else if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+            $_SESSION['flash']['error'] = 'Email invalide';
+            require_once __DIR__ . '/../View/login.php';
+            return;
+        }
+        // vérification si l'email existe déjà
         $user = new \App\Model\UserModel();
-        $user->login($_POST['email'], $_POST['password']);
+        $userDispo = $user->findBy(['email' => htmlspecialchars($_POST['email'])]);
+
+        if (!$userDispo) {
+            $_SESSION['flash']['error'] = 'Email ou mot de passe incorrect';
+            require_once __DIR__ . '/../View/login.php';
+            return;
+        }
+        // vérification du mot de passe
+        if (!password_verify($_POST['password'], $userDispo['password'])) {
+            $_SESSION['flash']['error'] = 'Email ou mot de passe incorrect';
+            require_once __DIR__ . '/../View/login.php';
+            return;
+        }
+        // si tout est ok on connecte l'utilisateur et on le redirige vers la page d'accueil
+        $_SESSION['user'] = $userDispo;
         header('Location: /cinetech');
     }
 }

@@ -45,6 +45,6 @@ abstract class AbstractModel
         }
         $req = $this->bdd->prepare($sql);
         $req->execute();
-        return $req->fetch();
+        return $req->fetch(\PDO::FETCH_ASSOC);
     }
 }

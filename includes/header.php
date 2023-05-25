@@ -40,11 +40,11 @@
         <div id="popContent">
             <i class="fa-solid fa-times" id="closePop"></i>
             <?php if (isset($_SESSION['user'])) : ?>
-                <h2>Bonjour <?= $_SESSION['user']['username'] ?></h2>
+                <h4>Bonjour <?= $_SESSION['user']['name'] ?></h4>
                 <a href="/cinetech/profil">Profil</a>
                 <a href="/cinetech/logout">Déconnexion</a>
             <?php else : ?>
-                <a href="/cinetech/connection">Connexion</a>
+                <a href="/cinetech/login">Connexion</a>
                 <a href="/cinetech/register">Inscription</a>
             <?php endif; ?>
         </div>
