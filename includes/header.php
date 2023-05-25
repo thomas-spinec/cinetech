@@ -1,7 +1,3 @@
-<?php
-session_start();
-?>
-
 <section id="topHead">
     <a href="/cinetech/">
         <h1>Cinetech</h1>
@@ -44,12 +40,12 @@ session_start();
         <div id="popContent">
             <i class="fa-solid fa-times" id="closePop"></i>
             <?php if (isset($_SESSION['user'])) : ?>
-                <h2>Bonjour <?= $_SESSION['user']['username'] ?></h2>
+                <h4>Bonjour <?= $_SESSION['user']['name'] ?></h4>
                 <a href="/cinetech/profil">Profil</a>
                 <a href="/cinetech/logout">Déconnexion</a>
             <?php else : ?>
-                <a href="/cinetech/connexion">Connexion</a>
-                <a href="/cinetech/inscription">Inscription</a>
+                <a href="/cinetech/login">Connexion</a>
+                <a href="/cinetech/register">Inscription</a>
             <?php endif; ?>
         </div>
     </div>
