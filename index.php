@@ -32,6 +32,11 @@ $router->addRoutes([
     ['GET', '/movie/[i:id]/comments', function ($id) {
         // require __DIR__ . '/src/View/comments.php';
     }, 'movieComments'],
+    // map récup comments movie replies
+    ['GET', '/movie/[i:id]/comments/[a:action]', function ($id, $action) {
+        $commentController = new CommentController();
+        $commentController->getReplies($id, $action, 'movie');
+    }, 'movieCommentsReplies'],
     // map serie
     ['GET', '/serie/[i:id]', function ($id) {
         require __DIR__ . '/src/View/serie.php';

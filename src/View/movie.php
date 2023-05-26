@@ -48,9 +48,7 @@
 
         <section id="popup" class="hidden">
             <div id="pop">
-                <div id="popContent">
-                    <i class="fa-solid fa-times" id="closePop"></i>
-                    <div id="formReponse"></div>
+                <div id="formReponse">
                 </div>
             </div>
         </section>

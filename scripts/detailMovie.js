@@ -177,6 +177,36 @@ async function displayComments() {
     commentReply.classList.add("reply");
     commentDiv.appendChild(commentReply);
 
+    // div pour les réponses
+    const promiseReply = await fetch(
+      "/cinetech/movie/" + movieId + "/comments/" + comment.id,
+      options
+    );
+    const replies = await promiseReply.json();
+    if (replies.error) {
+      // console.log(replies.error);
+    } else {
+      const repliesDiv = document.createElement("div");
+      repliesDiv.classList.add("replies");
+      for (let reply of replies) {
+        const replyDiv = document.createElement("div");
+        replyDiv.classList.add("replyDiv");
+
+        const replyAuthor = document.createElement("h4");
+        replyAuthor.textContent = reply.author;
+        replyDiv.appendChild(replyAuthor);
+
+        const replyContent = document.createElement("p");
+        replyContent.textContent = reply.comment;
+        replyDiv.appendChild(replyContent);
+
+        // mise des éléments dans le DOM
+
+        repliesDiv.appendChild(replyDiv);
+      }
+      commentDiv.appendChild(repliesDiv);
+    }
+
     // mise des éléments dans le DOM
 
     commentArticle.appendChild(commentDiv);
@@ -185,6 +215,7 @@ async function displayComments() {
 
 function replyToComment(idcomment) {
   const formDiv = document.getElementById("formReponse");
+  formDiv.innerHTML = "";
   // création du formulaire
   const form = document.createElement("form");
   form.method = "POST";
@@ -228,6 +259,8 @@ function replyToComment(idcomment) {
         // on réaffiche les commentaires
         displayComments();
       }
+      // on vide la popup et on la ferme
+      popup.classList.toggle("hidden");
     }
   });
 }
@@ -245,13 +278,4 @@ commentArticle.addEventListener("click", function (event) {
     popup.classList.toggle("hidden");
     replyToComment(idcomment);
   }
-});
-
-// partie pour fermer la popup
-console.log(closePop);
-console.log(popup);
-closePop.addEventListener("click", function () {
-  console.log("click");
-  formDiv.innerHTML = "";
-  popup.classList.toggle("hidden");
 });

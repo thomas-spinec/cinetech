@@ -61,6 +61,7 @@ abstract class AbstractModel
         $sql = "INSERT INTO $this->table (";
         $i = 0;
         foreach ($array as $key => $value) {
+            $key = substr($key, 1);
             if ($i == 0) {
                 $sql .= "$key";
             } else {
@@ -72,9 +73,9 @@ abstract class AbstractModel
         $i = 0;
         foreach ($array as $key => $value) {
             if ($i == 0) {
-                $sql .= "':$key'";
+                $sql .= "$key";
             } else {
-                $sql .= ", ':$key'";
+                $sql .= ", $key";
             }
             $i++;
         }
