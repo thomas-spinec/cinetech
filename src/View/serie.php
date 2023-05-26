@@ -25,7 +25,20 @@
         <article id="serie">
         </article>
 
-        <article id="comments"></article>
+        <article id="commentsPart">
+            <h2>Commentaires</h2>
+            <section id="comments">
+            </section>
+
+            <section id="addComment">
+                <h3>Ajouter un commentaire</h3>
+                <form method="POST">
+                    <label for="comment">Commentaire</label>
+                    <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
+                    <input type="submit" value="Envoyer">
+                </form>
+            </section>
+        </article>
 
         <article id="series_week">
             <h2>Les séries similaires</h2>

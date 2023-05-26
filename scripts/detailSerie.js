@@ -141,14 +141,6 @@ async function displaySimilarSeries() {
     serieTitle.textContent = serie.name;
     serieDiv.appendChild(serieTitle);
 
-    const serieDescription = document.createElement("p");
-    if (serie.overview === "") {
-      serieDescription.textContent = "Pas de description disponible";
-    } else {
-      serieDescription.textContent = serie.overview;
-    }
-    serieDiv.appendChild(serieDescription);
-
     // mise des éléments dans le DOM
 
     similarSeries.appendChild(serieDiv);

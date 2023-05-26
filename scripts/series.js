@@ -43,14 +43,6 @@ async function displayWeekSeries() {
     serieTitle.textContent = serie.name;
     serieDiv.appendChild(serieTitle);
 
-    const serieDescription = document.createElement("p");
-    if (serie.overview === "") {
-      serieDescription.textContent = "Pas de description disponible";
-    } else {
-      serieDescription.textContent = serie.overview;
-    }
-    serieDiv.appendChild(serieDescription);
-
     // mise des éléments dans le DOM
 
     weekSeries.appendChild(serieDiv);
@@ -116,16 +108,8 @@ async function displaySeries(genreId = null, page = 1) {
     const serieTitle = document.createElement("h4");
     serieTitle.textContent = serie.name;
 
-    const serieDescription = document.createElement("p");
-    if (serie.overview === "") {
-      serieDescription.textContent = "Pas de description disponible";
-    } else {
-      serieDescription.textContent = serie.overview;
-    }
-
     // mise des éléments dans le DOM
     serieDiv.appendChild(serieTitle);
-    serieDiv.appendChild(serieDescription);
     Series.appendChild(serieDiv);
   }
   // création des bontons de pagination

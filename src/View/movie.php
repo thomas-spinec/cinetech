@@ -25,12 +25,35 @@
         <article id="movie">
         </article>
 
-        <article id="comments"></article>
+        <article id="commentsParts">
+            <h2>Commentaires</h2>
+            <section id="comments">
+            </section>
+
+            <section id="addComment">
+                <h3>Ajouter un commentaire</h3>
+                <form method="POST">
+                    <label for="comment">Commentaire</label>
+                    <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
+                    <input type="submit" value="Envoyer">
+                </form>
+            </section>
+        </article>
 
         <article id="movies_week">
             <h2>Les films similaires</h2>
             <section class="movies">
+            </section>
         </article>
+
+        <section id="popup" class="hidden">
+            <div id="pop">
+                <div id="popContent">
+                    <i class="fa-solid fa-times" id="closePop"></i>
+                    <div id="formReponse"></div>
+                </div>
+            </div>
+        </section>
     </main>
 
 </body>

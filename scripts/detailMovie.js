@@ -2,6 +2,8 @@ const movieArticle = document.querySelector("#movie");
 const movieId = window.location.pathname.split("/").pop();
 const commentArticle = document.querySelector("#comments");
 const similarMovies = document.querySelector(".movies");
+const popup = document.getElementById("popup");
+const closePop = document.querySelector("#closePop");
 
 const options = {
   method: "GET",
@@ -131,14 +133,6 @@ async function displaySimilarMovies() {
     movieTitle.textContent = movie.title;
     movieDiv.appendChild(movieTitle);
 
-    const movieDescription = document.createElement("p");
-    if (movie.overview === "") {
-      movieDescription.textContent = "Pas de description disponible";
-    } else {
-      movieDescription.textContent = movie.overview;
-    }
-    movieDiv.appendChild(movieDescription);
-
     // mise des éléments dans le DOM
 
     similarMovies.appendChild(movieDiv);
@@ -146,6 +140,7 @@ async function displaySimilarMovies() {
 }
 
 async function displayComments() {
+  commentArticle.innerHTML = "";
   const promise = await fetch(
     "https://api.themoviedb.org/3/movie/" + movieId + "/reviews?language=fr-FR",
     options
@@ -173,12 +168,90 @@ async function displayComments() {
     commentContent.textContent = comment.content;
     commentDiv.appendChild(commentContent);
 
+    // ---------------------------------------------
+    // bouton pour répndre au commentaire
+    const commentReply = document.createElement("button");
+    commentReply.textContent = "Répondre";
+    // mettre l'id du commentaire dans le bouton
+    commentReply.dataset.id = comment.id;
+    commentReply.classList.add("reply");
+    commentDiv.appendChild(commentReply);
+
     // mise des éléments dans le DOM
 
     commentArticle.appendChild(commentDiv);
   }
 }
 
+function replyToComment(idcomment) {
+  const formDiv = document.getElementById("formReponse");
+  // création du formulaire
+  const form = document.createElement("form");
+  form.method = "POST";
+  // création du textarea
+  const textarea = document.createElement("textarea");
+  textarea.name = "content";
+  textarea.placeholder = "Votre réponse";
+  form.appendChild(textarea);
+  // création du bouton
+  const button = document.createElement("button");
+  button.type = "submit";
+  button.textContent = "Répondre";
+  form.appendChild(button);
+  // mise du formulaire dans le DOM
+  formDiv.appendChild(form);
+  // quand on soumet le formulaire
+  form.addEventListener("submit", async function (event) {
+    event.preventDefault();
+    if (textarea.value.length < 1) {
+      alert("Veuillez écrire votre réponse");
+    } else {
+      // on récupère les données du formulaire
+      const data = new FormData(this);
+      // on ajoute l'id du commentaire au formulaire
+      data.append("comment_id", idcomment);
+      // on ajoute l'id du film au formulaire
+      data.append("movie_id", movieId);
+      // on ajoute le type (movie ou serie) au formulaire
+      data.append("type", "movie");
+      // on envoie les données du formulaire
+      const promise = await fetch("/cinetech/reply", {
+        method: "POST",
+        body: data,
+      });
+      const response = await promise.json();
+      // si il y a une erreur
+      if (response.error) {
+        alert(response.error);
+      } else if (response.success) {
+        alert(response.success);
+        // on réaffiche les commentaires
+        displayComments();
+      }
+    }
+  });
+}
+
+// ---------------------------------------------
+
 displayMovie();
 displaySimilarMovies();
 displayComments();
+
+commentArticle.addEventListener("click", function (event) {
+  if (event.target.classList.contains("reply")) {
+    // on affiche le formulaire de réponse dans une popup
+    const idcomment = event.target.dataset.id;
+    popup.classList.toggle("hidden");
+    replyToComment(idcomment);
+  }
+});
+
+// partie pour fermer la popup
+console.log(closePop);
+console.log(popup);
+closePop.addEventListener("click", function () {
+  console.log("click");
+  formDiv.innerHTML = "";
+  popup.classList.toggle("hidden");
+});

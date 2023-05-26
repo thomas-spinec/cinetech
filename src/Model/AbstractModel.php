@@ -47,4 +47,45 @@ abstract class AbstractModel
         $req->execute();
         return $req->fetch(\PDO::FETCH_ASSOC);
     }
+
+    public function findAll()
+    {
+        $sql = "SELECT * FROM $this->table";
+        $req = $this->bdd->prepare($sql);
+        $req->execute();
+        return $req->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function insert(array $array)
+    {
+        $sql = "INSERT INTO $this->table (";
+        $i = 0;
+        foreach ($array as $key => $value) {
+            if ($i == 0) {
+                $sql .= "$key";
+            } else {
+                $sql .= ", $key";
+            }
+            $i++;
+        }
+        $sql .= ") VALUES (";
+        $i = 0;
+        foreach ($array as $key => $value) {
+            if ($i == 0) {
+                $sql .= "':$key'";
+            } else {
+                $sql .= ", ':$key'";
+            }
+            $i++;
+        }
+        $sql .= ")";
+        $req = $this->bdd->prepare($sql);
+        $req->execute($array);
+
+        if ($req) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

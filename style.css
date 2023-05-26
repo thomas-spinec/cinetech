@@ -156,7 +156,8 @@ a:hover {
 }
 
 /* pop up */
-#authSection {
+#authSection,
+#popup {
   display: block;
   position: fixed;
   top: 0;
