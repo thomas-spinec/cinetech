@@ -1,7 +1,9 @@
 <?php
 session_start();
 
+// use AltoRouter;
 use App\Controller\AuthController;
+use App\Controller\CommentController;
 
 require 'vendor/autoload.php';
 
@@ -26,10 +28,42 @@ $router->addRoutes([
     ['GET', '/movie/[i:id]', function ($id) {
         require __DIR__ . '/src/View/movie.php';
     }, 'movie'],
+    // map récup comments movie
+    ['GET', '/movie/[i:id]/comments', function ($id) {
+        $commentController = new CommentController();
+        $commentController->getComments($id, 'movie');
+    }, 'movieComments'],
+    // map récup comments movie replies
+    ['GET', '/movie/[i:id]/comments/[a:action]', function ($id, $action) {
+        $commentController = new CommentController();
+        $commentController->getReplies($id, $action, 'movie');
+    }, 'movieCommentsReplies'],
     // map serie
     ['GET', '/serie/[i:id]', function ($id) {
         require __DIR__ . '/src/View/serie.php';
     }, 'serie'],
+    // map récup comments serie
+    ['GET', '/serie/[i:id]/comments', function ($id) {
+        $commentController = new CommentController();
+        $commentController->getComments($id, 'tv');
+    }, 'serieComments'],
+    // map récup comments serie replies
+    ['GET', '/serie/[i:id]/comments/[a:action]', function ($id, $action) {
+        $commentController = new CommentController();
+        $commentController->getReplies($id, $action, 'tv');
+    }, 'serieCommentsReplies'],
+
+    // map make comment or reply
+    ['POST', '/comment', function () {
+        $commentController = new CommentController();
+        $commentController->addComment();
+    }, 'comments'],
+    // map make reply
+    ['POST', '/reply', function () {
+        $commentController = new CommentController();
+        $commentController->addReply();
+    }, 'reply'],
+
     // map register
     ['GET', '/register', function () {
         $authController = new AuthController();

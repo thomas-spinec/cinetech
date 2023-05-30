@@ -56,13 +56,9 @@ async function displayMovies() {
     const movieTitle = document.createElement("h4");
     movieTitle.textContent = movie.title;
 
-    const movieDescription = document.createElement("p");
-    movieDescription.textContent = movie.overview;
-
     // mise des éléments dans le DOM
     movieDiv.appendChild(movieLink);
     movieDiv.appendChild(movieTitle);
-    movieDiv.appendChild(movieDescription);
     moviesSection.appendChild(movieDiv);
   }
 }
@@ -113,13 +109,6 @@ async function displaySeries() {
     serieDiv.appendChild(serieLink);
 
     serieDiv.appendChild(serieTitle);
-    const serieDescription = document.createElement("p");
-    if (serie.overview === "") {
-      serieDescription.textContent = "Pas de description disponible";
-    } else {
-      serieDescription.textContent = serie.overview;
-    }
-    serieDiv.appendChild(serieDescription);
     seriesSection.appendChild(serieDiv);
   }
 }

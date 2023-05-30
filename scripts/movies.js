@@ -43,14 +43,6 @@ async function displayWeekMovies() {
     movieTitle.textContent = movie.title;
     movieDiv.appendChild(movieTitle);
 
-    const movieDescription = document.createElement("p");
-    if (movie.overview === "") {
-      movieDescription.textContent = "Pas de description disponible";
-    } else {
-      movieDescription.textContent = movie.overview;
-    }
-    movieDiv.appendChild(movieDescription);
-
     // mise des éléments dans le DOM
 
     weekMovies.appendChild(movieDiv);
@@ -116,16 +108,8 @@ async function displayMovies(genreId = null, page = 1) {
     const movieTitle = document.createElement("h4");
     movieTitle.textContent = movie.title;
 
-    const movieDescription = document.createElement("p");
-    if (movie.overview === "") {
-      movieDescription.textContent = "Pas de description disponible";
-    } else {
-      movieDescription.textContent = movie.overview;
-    }
-
     // mise des éléments dans le DOM
     movieDiv.appendChild(movieTitle);
-    movieDiv.appendChild(movieDescription);
     Movies.appendChild(movieDiv);
   }
   // création des bontons de pagination
