@@ -152,7 +152,6 @@ async function displayComments() {
   //fetch des commentaires de la bdd
   const promisebdd = await fetch("/cinetech/movie/" + movieId + "/comments");
   const commentsbdd = await promisebdd.json();
-  console.log(commentsbdd);
 
   // si il n'y a pas de commentaires
   if (
