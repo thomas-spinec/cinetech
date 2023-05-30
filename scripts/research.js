@@ -33,13 +33,13 @@ async function autocomplete($input) {
     if (results[i].media_type === "movie") {
       researchResults.innerHTML += `
         <div class="result">
-          <a href="/cinetech/movie/${results[i].id}"><h4>${results[i].title}</h4></a>
+          <a href="/cinetech/movie/${results[i].id}"><h4>Film: ${results[i].title}</h4></a>
         </div>
       `;
     } else if (results[i].media_type === "tv") {
       researchResults.innerHTML += `
         <div class="result">
-          <a href="/cinetech/serie/${results[i].id}"><h4>${results[i].name}</h4></a>
+          <a href="/cinetech/serie/${results[i].id}"><h4>Série: ${results[i].name}</h4></a>
         </div>
       `;
     }

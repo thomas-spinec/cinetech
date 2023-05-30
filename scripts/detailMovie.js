@@ -1,6 +1,8 @@
 const movieArticle = document.querySelector("#movie");
 const movieId = window.location.pathname.split("/").pop();
 const commentArticle = document.querySelector("#comments");
+const divAddComment = document.querySelector("#addComment");
+const formAddComment = divAddComment.querySelector("form");
 const similarMovies = document.querySelector(".movies");
 const popup = document.getElementById("popup");
 const closePop = document.querySelector("#closePop");
@@ -147,8 +149,16 @@ async function displayComments() {
   );
   const comments = await promise.json();
 
+  //fetch des commentaires de la bdd
+  const promisebdd = await fetch("/cinetech/movie/" + movieId + "/comments");
+  const commentsbdd = await promisebdd.json();
+  console.log(commentsbdd);
+
   // si il n'y a pas de commentaires
-  if (comments.results.length === 0) {
+  if (
+    comments.results.length === 0 &&
+    commentsbdd.error === "Il n'y a pas de commentaire"
+  ) {
     const noComments = document.createElement("h4");
     noComments.textContent = "Pas de commentaires";
     commentArticle.appendChild(noComments);
@@ -156,7 +166,73 @@ async function displayComments() {
     return;
   }
 
-  for (let comment of comments.results) {
+  // ---------------------------------------------
+  // Partie TMDB
+  if (comments.results.length > 0) {
+    for (let comment of comments.results) {
+      const commentDiv = document.createElement("div");
+      commentDiv.classList.add("comment");
+
+      const commentAuthor = document.createElement("h4");
+      commentAuthor.textContent = comment.author;
+      commentDiv.appendChild(commentAuthor);
+
+      const commentContent = document.createElement("p");
+      commentContent.textContent = comment.content;
+      commentDiv.appendChild(commentContent);
+
+      // ---------------------------------------------
+      // bouton pour répndre au commentaire
+      const commentReply = document.createElement("button");
+      commentReply.textContent = "Répondre";
+      // mettre l'id du commentaire dans le bouton
+      commentReply.dataset.id = comment.id;
+      commentReply.classList.add("reply");
+      commentDiv.appendChild(commentReply);
+
+      // div pour les réponses
+      const promiseReply = await fetch(
+        "/cinetech/movie/" + movieId + "/comments/" + comment.id,
+        options
+      );
+      const replies = await promiseReply.json();
+      if (replies.error) {
+        // console.log(replies.error);
+      } else {
+        const repliesDiv = document.createElement("div");
+        repliesDiv.classList.add("replies");
+        for (let reply of replies) {
+          const replyDiv = document.createElement("div");
+          replyDiv.classList.add("replyDiv");
+
+          const replyAuthor = document.createElement("h4");
+          replyAuthor.textContent = reply.author;
+          replyDiv.appendChild(replyAuthor);
+
+          const replyContent = document.createElement("p");
+          replyContent.textContent = reply.comment;
+          replyDiv.appendChild(replyContent);
+
+          // mise des éléments dans le DOM
+
+          repliesDiv.appendChild(replyDiv);
+        }
+        commentDiv.appendChild(repliesDiv);
+      }
+
+      // mise des éléments dans le DOM
+
+      commentArticle.appendChild(commentDiv);
+    }
+  }
+
+  // ---------------------------------------------
+  // Partie BDD
+  if (commentsbdd.error) {
+    // console.log(commentsbdd.error);
+    return;
+  }
+  for (let comment of commentsbdd) {
     const commentDiv = document.createElement("div");
     commentDiv.classList.add("comment");
 
@@ -165,7 +241,7 @@ async function displayComments() {
     commentDiv.appendChild(commentAuthor);
 
     const commentContent = document.createElement("p");
-    commentContent.textContent = comment.content;
+    commentContent.textContent = comment.comment;
     commentDiv.appendChild(commentContent);
 
     // ---------------------------------------------
@@ -213,6 +289,23 @@ async function displayComments() {
   }
 }
 
+async function addComment(form) {
+  let data = new FormData(form);
+  data.append("movie_id", movieId);
+  data.append("type", "movie");
+  const promise = await fetch("/cinetech/comment", {
+    method: "POST",
+    body: data,
+  });
+  const response = await promise.json();
+  if (response.error) {
+    alert(response.error);
+  } else if (response.success) {
+    alert(response.success);
+    displayComments();
+  }
+}
+
 function replyToComment(idcomment) {
   const formDiv = document.getElementById("formReponse");
   formDiv.innerHTML = "";
@@ -246,7 +339,7 @@ function replyToComment(idcomment) {
       // on ajoute le type (movie ou serie) au formulaire
       data.append("type", "movie");
       // on envoie les données du formulaire
-      const promise = await fetch("/cinetech/reply", {
+      const promise = await fetch("/cinetech/comment", {
         method: "POST",
         body: data,
       });
@@ -277,5 +370,15 @@ commentArticle.addEventListener("click", function (event) {
     const idcomment = event.target.dataset.id;
     popup.classList.toggle("hidden");
     replyToComment(idcomment);
+  }
+});
+
+formAddComment.addEventListener("submit", function (event) {
+  event.preventDefault();
+  if (this.comment.value.length < 1) {
+    alert("Veuillez écrire votre commentaire");
+    return;
+  } else {
+    addComment(this);
   }
 });

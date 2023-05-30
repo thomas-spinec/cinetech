@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-use AltoRouter;
+// use AltoRouter;
 use App\Controller\AuthController;
 use App\Controller\CommentController;
 
@@ -30,7 +30,8 @@ $router->addRoutes([
     }, 'movie'],
     // map récup comments movie
     ['GET', '/movie/[i:id]/comments', function ($id) {
-        // require __DIR__ . '/src/View/comments.php';
+        $commentController = new CommentController();
+        $commentController->getComments($id, 'movie');
     }, 'movieComments'],
     // map récup comments movie replies
     ['GET', '/movie/[i:id]/comments/[a:action]', function ($id, $action) {
@@ -43,12 +44,19 @@ $router->addRoutes([
     }, 'serie'],
     // map récup comments serie
     ['GET', '/serie/[i:id]/comments', function ($id) {
-        // require __DIR__ . '/src/View/comments.php';
-    }, 'serieComments'],
-
-    // map make comments
-    ['POST', '/comments', function () {
         $commentController = new CommentController();
+        $commentController->getComments($id, 'tv');
+    }, 'serieComments'],
+    // map récup comments serie replies
+    ['GET', '/serie/[i:id]/comments/[a:action]', function ($id, $action) {
+        $commentController = new CommentController();
+        $commentController->getReplies($id, $action, 'tv');
+    }, 'serieCommentsReplies'],
+
+    // map make comment or reply
+    ['POST', '/comment', function () {
+        $commentController = new CommentController();
+        $commentController->addComment();
     }, 'comments'],
     // map make reply
     ['POST', '/reply', function () {

@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Model\UserModel;
+
 class AuthController
 {
     private $user;
@@ -56,7 +58,7 @@ class AuthController
             return;
         }
         // vérification si l'email existe déjà
-        $user = new \App\Model\UserModel();
+        $user = new UserModel();
         $userDispo = $user->findBy(['email' => htmlspecialchars($_POST['email'])]);
         if ($userDispo) {
             $_SESSION['flash']['error'] = 'Email déjà utilisé';
