@@ -26,7 +26,7 @@ class FavController
             }
         } else {
             // si l'utilisateur n'est pas connecté on affiche le bouton pour se connecter
-            echo '<a href="/cinetech/login" class="btn btn-primary">Se connecter pour ajouter aux favoris</a>';
+            echo '<a href="/cinetech/login">Se connecter pour ajouter aux favoris</a>';
         }
     }
 

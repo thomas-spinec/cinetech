@@ -8,15 +8,6 @@ const similarSeries = document.querySelector(".series");
 const popup = document.getElementById("popup");
 const closePop = document.querySelector("#closePop");
 
-const options = {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NjExNjEwZmVjYzg0MGJjNzQwMjMzMDlmNWJmYTg0MCIsInN1YiI6IjY0NjIwMDhmZTNmYTJmMDE2NjIxOTc1OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.oSuycSPIbZ9QaXCZESa2bFfwPPhrGispvuNLEiTCZ-Q",
-  },
-};
-
 async function displaySerie() {
   const promise = await fetch(
     "https://api.themoviedb.org/3/tv/" +
