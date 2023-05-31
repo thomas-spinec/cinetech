@@ -89,4 +89,26 @@ abstract class AbstractModel
             return false;
         }
     }
+
+    public function delete(array $array)
+    {
+        $sql = "DELETE FROM $this->table WHERE ";
+        $i = 0;
+        foreach ($array as $key => $value) {
+            if ($i == 0) {
+                $sql .= "$key = :$key";
+            } else {
+                $sql .= " AND $key = :$key";
+            }
+            $i++;
+        }
+        $req = $this->bdd->prepare($sql);
+        $req->execute($array);
+
+        if ($req) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

@@ -2,7 +2,6 @@
 session_start();
 
 // use AltoRouter;
-use AltoRouter;
 use App\Controller\FavController;
 use App\Controller\AuthController;
 use App\Controller\CommentController;
@@ -67,10 +66,16 @@ $router->addRoutes([
     }, 'reply'],
 
     // map pour afficher le bouton d'ajout aux favoris
-    ['GET', '/favoriteButton/[i:id]', function ($id) {
+    ['POST', '/favoriteButton/[i:id]', function ($id) {
         $commentController = new FavController();
-        $commentController->displayFavButton($id, 'movie');
-    }, 'movieFavorite'],
+        $commentController->displayFavButton($id, $_POST['type']);
+    }, 'Favorite'],
+
+    //map pour toggle le favori
+    ['POST', '/favorite', function () {
+        $commentController = new FavController();
+        $commentController->toggleFav();
+    }, 'toggleFav'],
 
     // map register
     ['GET', '/register', function () {

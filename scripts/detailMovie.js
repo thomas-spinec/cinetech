@@ -1,4 +1,5 @@
 const movieArticle = document.querySelector("#movie");
+const titleDiv = document.querySelector("#title");
 const movieId = window.location.pathname.split("/").pop();
 const commentArticle = document.querySelector("#comments");
 const divAddComment = document.querySelector("#addComment");
@@ -25,10 +26,13 @@ async function displayMovie() {
   );
   const movie = await promise.json();
 
+  const Divgauche = document.createElement("div");
+  const Divdroite = document.createElement("div");
+
   // TITLE -------------------------
   const movieTitle = document.createElement("h2");
   movieTitle.textContent = movie.title;
-  movieArticle.appendChild(movieTitle);
+  titleDiv.appendChild(movieTitle);
 
   // IMAGE -------------------------
   const movieImage = document.createElement("img");
@@ -39,7 +43,17 @@ async function displayMovie() {
     movieImage.src = "https://image.tmdb.org/t/p/w400" + movie.poster_path;
     movieImage.alt = movie.title;
   }
-  movieArticle.appendChild(movieImage);
+  Divgauche.appendChild(movieImage);
+
+  // FAVORIS -------------------------
+  let data = new FormData();
+  data.append("type", "movie");
+  const promiseFavoris = await fetch("/cinetech/favoriteButton/" + movieId, {
+    method: "POST",
+    body: data,
+  });
+  const responseButton = await promiseFavoris.text();
+  Divgauche.innerHTML += responseButton;
 
   // DESCRIPTION -------------------------
   const movieDescription = document.createElement("p");
@@ -48,7 +62,7 @@ async function displayMovie() {
   } else {
     movieDescription.textContent = movie.overview;
   }
-  movieArticle.appendChild(movieDescription);
+  Divgauche.appendChild(movieDescription);
 
   // GENRES -------------------------
   const movieGenres = document.createElement("p");
@@ -56,7 +70,7 @@ async function displayMovie() {
   for (let genre of movie.genres) {
     movieGenres.textContent += genre.name + ", ";
   }
-  movieArticle.appendChild(movieGenres);
+  Divdroite.appendChild(movieGenres);
 
   // DATE -------------------------
   const movieDate = document.createElement("p");
@@ -72,12 +86,12 @@ async function displayMovie() {
   movie.release_date = day + "/" + month + "/" + year;
 
   movieDate.textContent = "Sortie : " + movie.release_date;
-  movieArticle.appendChild(movieDate);
+  Divdroite.appendChild(movieDate);
 
   // DURATION -------------------------
   const movieDuration = document.createElement("p");
   movieDuration.textContent = "Durée : " + movie.runtime + " minutes";
-  movieArticle.appendChild(movieDuration);
+  Divdroite.appendChild(movieDuration);
 
   // DIRECTOR -------------------------
   const movieDirector = document.createElement("p");
@@ -88,7 +102,7 @@ async function displayMovie() {
     }
   }
 
-  movieArticle.appendChild(movieDirector);
+  Divdroite.appendChild(movieDirector);
 
   // COUNTRIES -------------------------
   const movieCountries = document.createElement("p");
@@ -96,7 +110,7 @@ async function displayMovie() {
   for (let country of movie.production_countries) {
     movieCountries.textContent += country.name + ", ";
   }
-  movieArticle.appendChild(movieCountries);
+  Divdroite.appendChild(movieCountries);
 
   // CAST -------------------------
   const movieCast = document.createElement("p");
@@ -104,7 +118,11 @@ async function displayMovie() {
   for (let actor of movie.credits.cast) {
     movieCast.textContent += actor.name + ", ";
   }
-  movieArticle.appendChild(movieCast);
+  Divdroite.appendChild(movieCast);
+
+  // Ajout des div dans le DOM
+  movieArticle.appendChild(Divgauche);
+  movieArticle.appendChild(Divdroite);
 }
 
 async function displaySimilarMovies() {
@@ -357,6 +375,24 @@ function replyToComment(idcomment) {
   });
 }
 
+async function toggleFavorite(id, state) {
+  let data = new FormData();
+  data.append("type", "movie");
+  data.append("id_type", id);
+  data.append("state", state);
+  const promise = await fetch("/cinetech/favorite", {
+    method: "POST",
+    body: data,
+  });
+  const response = await promise.json();
+  if (response.error) {
+    alert(response.error);
+  } else if (response.success) {
+    window.location.reload();
+    alert(response.success);
+  }
+}
+
 // ---------------------------------------------
 
 displayMovie();
@@ -379,5 +415,17 @@ formAddComment.addEventListener("submit", function (event) {
     return;
   } else {
     addComment(this);
+  }
+});
+
+movieArticle.addEventListener("click", function (event) {
+  if (event.target.classList.contains("addFav")) {
+    const id = movieId;
+    const state = "add";
+    toggleFavorite(id, state);
+  } else if (event.target.classList.contains("deleteFav")) {
+    const id = movieId;
+    const state = "remove";
+    toggleFavorite(id, state);
   }
 });

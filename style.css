@@ -459,3 +459,34 @@ a:hover {
   text-align: center;
   margin: 10px 0;
 }
+
+/* ******************************************************************** */
+
+/* Movie et Serie Section */
+
+#movie,
+#serie {
+  display: flex;
+  flex-direction: row;
+}
+
+/* premier enfant de #movie et #serie */
+#movie > *:first-child,
+#serie > *:first-child {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  margin: 10px;
+}
+
+@media all and (max-width: 768px) {
+  #movie,
+  #serie {
+    flex-direction: column;
+  }
+
+  #movie > *:first-child,
+  #serie > *:first-child {
+    width: 100%;
+  }
+}
