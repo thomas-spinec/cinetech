@@ -122,4 +122,15 @@ class AuthController
             header('Location: /cinetech');
         }
     }
+
+    public function getInformations()
+    {
+        if (isset($_SESSION['user'])) {
+            $user = new UserModel();
+            $user = $user->findBy(['id_user' => $_SESSION['user']['id_user']]);
+            echo json_encode($user);
+        } else {
+            header('Location: /cinetech');
+        }
+    }
 }

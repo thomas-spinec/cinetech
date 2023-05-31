@@ -45,7 +45,7 @@ abstract class AbstractModel
         }
         $req = $this->bdd->prepare($sql);
         $req->execute();
-        return $req->fetch(\PDO::FETCH_ASSOC);
+        return $req->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function findAll()

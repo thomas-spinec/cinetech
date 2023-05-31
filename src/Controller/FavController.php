@@ -65,4 +65,18 @@ class FavController
             echo json_encode(['error' => 'Il y a eu une erreur lors de l\'envoi des données']);
         }
     }
+
+    public function getFav()
+    {
+        // on vérifie que l'utilisateur est connecté
+        if (isset($_SESSION['user'])) {
+            $favModel = new FavModel();
+            $fav = $favModel->findBy(["id_user" => $_SESSION['user']['id_user']]);
+            // on renvoie les favoris en json
+            echo json_encode($fav);
+        } else {
+            // si l'utilisateur n'est pas connecté on renvoie un message d'erreur
+            echo json_encode(['error' => 'Vous devez être connecté']);
+        }
+    }
 }
