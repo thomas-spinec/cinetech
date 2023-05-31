@@ -108,6 +108,18 @@ $router->addRoutes([
         $authController = new AuthController();
         $authController->profil();
     }, 'profil'],
+
+    // map profil favoris
+    ['GET', '/profil/favorites', function () {
+        $authController = new FavController();
+        $authController->getFav();
+    }, 'favorites'],
+
+    // map profil informations
+    ['GET', '/profil/informations', function () {
+        $authController = new AuthController();
+        $authController->getInformations();
+    }, 'informations'],
 ]);
 
 

@@ -12,6 +12,7 @@
     <!-- script -->
     <script defer src="/cinetech/scripts/research.js"></script>
     <script defer src="/cinetech/scripts/menu.js"></script>
+    <script defer src="/cinetech/scripts/profil.js"></script>
     <title>profil</title>
 </head>
 
@@ -19,6 +20,18 @@
     <header>
         <?php require_once 'includes/header.php'; ?>
     </header>
+
+    <main>
+        <section class="intro">
+            <h1>Profil</h1>
+            <p>Bonjour <?= $_SESSION['user']['name'] ?></p>
+        </section>
+        <section class="onglet">
+            <button id="infos">informations</button>
+            <button id="favs">favoris</button>
+        </section>
+        <section class="display"></section>
+    </main>
 
 </body>
 
