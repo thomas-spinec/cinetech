@@ -604,3 +604,36 @@ main form input[type="submit"] {
     text-align: left;
   }
 }
+
+/* ******************************************************************** */
+/* profil section */
+
+.onglet button {
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #222;
+  border-radius: 10px;
+  background: #222;
+  color: #fff;
+  cursor: pointer;
+}
+
+.onglet button:hover {
+  background: #111;
+}
+
+.favMovie,
+.favSerie {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-self: center;
+  margin: 0 10px;
+  max-width: 100%;
+  border: 1px solid #222;
+}
+
+.favMovie .movie,
+.favSerie .serie {
+  border: none;
+}

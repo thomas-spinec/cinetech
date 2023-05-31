@@ -30,7 +30,8 @@
             <button id="infos">informations</button>
             <button id="favs">favoris</button>
         </section>
-        <section class="display"></section>
+        <section class="display">
+        </section>
     </main>
 
 </body>

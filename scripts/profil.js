@@ -30,16 +30,18 @@ async function getFavs() {
   sectionDisplay.innerHTML = "";
   const promise = await fetch("/cinetech/profil/favorites", options);
   const favs = await promise.json();
-  const divMovie = document.createElement("div");
-  divMovie.classList.add("favMovie");
   const titreMovie = document.createElement("h3");
   titreMovie.textContent = "Films favoris";
-  divMovie.appendChild(titreMovie);
-  const divSerie = document.createElement("div");
-  divSerie.classList.add("favSerie");
+  sectionDisplay.appendChild(titreMovie);
+  const divMovies = document.createElement("div");
+  divMovies.classList.add("favMovie", "moviesWrap");
+  sectionDisplay.appendChild(divMovies);
   const titreSerie = document.createElement("h3");
   titreSerie.textContent = "Séries favorites";
-  divSerie.appendChild(titreSerie);
+  sectionDisplay.appendChild(titreSerie);
+  const divSeries = document.createElement("div");
+  divSeries.classList.add("favSerie", "seriesWrap");
+  sectionDisplay.appendChild(divSeries);
 
   // boucle
   for (let fav of favs) {
@@ -69,7 +71,7 @@ async function getFavs() {
       movieTitle.textContent = movie.title;
       movieDiv.appendChild(movieTitle);
 
-      divMovie.appendChild(movieDiv);
+      divMovies.appendChild(movieDiv);
     } else if (fav.type == "tv") {
       const promiseSerie = await fetch(
         "https://api.themoviedb.org/3/tv/" + fav.id_type + "?language=fr-FR",
@@ -96,11 +98,9 @@ async function getFavs() {
       serieTitle.textContent = serie.name;
       serieDiv.appendChild(serieTitle);
 
-      divSerie.appendChild(serieDiv);
+      divSeries.appendChild(serieDiv);
     }
   }
-  sectionDisplay.appendChild(divMovie);
-  sectionDisplay.appendChild(divSerie);
 }
 
 // event listeners
