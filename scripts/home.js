@@ -1,15 +1,6 @@
 const moviesSection = document.querySelector(".movies");
 const seriesSection = document.querySelector(".series");
 
-const options = {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NjExNjEwZmVjYzg0MGJjNzQwMjMzMDlmNWJmYTg0MCIsInN1YiI6IjY0NjIwMDhmZTNmYTJmMDE2NjIxOTc1OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.oSuycSPIbZ9QaXCZESa2bFfwPPhrGispvuNLEiTCZ-Q",
-  },
-};
-
 async function displayMovies() {
   moviesSection.innerHTML = "";
   const randomPage = Math.floor(Math.random() * 500) + 1;
