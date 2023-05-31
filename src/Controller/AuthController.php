@@ -104,13 +104,13 @@ class AuthController
             return;
         }
         // vérification du mot de passe
-        if (!password_verify($_POST['password'], $userDispo['password'])) {
+        if (!password_verify($_POST['password'], $userDispo[0]['password'])) {
             $_SESSION['flash']['error'] = 'Email ou mot de passe incorrect';
             require_once __DIR__ . '/../View/login.php';
             return;
         }
         // si tout est ok on connecte l'utilisateur et on le redirige vers la page d'accueil
-        $_SESSION['user'] = $userDispo;
+        $_SESSION['user'] = $userDispo[0];
         header('Location: /cinetech');
     }
 
