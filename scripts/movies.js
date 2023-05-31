@@ -4,15 +4,6 @@ const allMoviesArticle = document.querySelector("#movies_by_genre");
 const Movies = allMoviesArticle.querySelector(".moviesWrap");
 const selectGenre = allMoviesArticle.querySelector("select");
 
-const options = {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NjExNjEwZmVjYzg0MGJjNzQwMjMzMDlmNWJmYTg0MCIsInN1YiI6IjY0NjIwMDhmZTNmYTJmMDE2NjIxOTc1OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.oSuycSPIbZ9QaXCZESa2bFfwPPhrGispvuNLEiTCZ-Q",
-  },
-};
-
 async function displayWeekMovies() {
   weekMovies.innerHTML = "";
 
