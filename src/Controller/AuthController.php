@@ -113,4 +113,13 @@ class AuthController
         $_SESSION['user'] = $userDispo;
         header('Location: /cinetech');
     }
+
+    public function profil()
+    {
+        if (isset($_SESSION['user'])) {
+            require_once __DIR__ . '/../View/profil.php';
+        } else {
+            header('Location: /cinetech');
+        }
+    }
 }
