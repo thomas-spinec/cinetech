@@ -102,6 +102,12 @@ $router->addRoutes([
         $authController = new AuthController();
         $authController->logout();
     }, 'logout'],
+
+    // map profil
+    ['GET', '/profil', function () {
+        $authController = new AuthController();
+        $authController->profil();
+    }, 'profil'],
 ]);
 
 
