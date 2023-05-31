@@ -22,6 +22,7 @@
     </header>
 
     <main>
+        <div id="title"></div>
         <article id="serie">
         </article>
 

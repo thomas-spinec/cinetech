@@ -1,4 +1,5 @@
 const serieArticle = document.querySelector("#serie");
+const titleDiv = document.querySelector("#title");
 const serieId = window.location.pathname.split("/").pop();
 const commentArticle = document.querySelector("#comments");
 const divAddComment = document.querySelector("#addComment");
@@ -38,6 +39,18 @@ async function displaySerie() {
     serieImage.src = "https://image.tmdb.org/t/p/w400" + serie.poster_path;
     serieImage.alt = serie.name;
   }
+
+  // FAVORIS -------------------------
+  let data = new FormData();
+  data.append("type", "tv");
+  const promiseFavoris = await fetch("/cinetech/favoriteButton/" + serieId, {
+    method: "POST",
+    body: data,
+  });
+  const responseButton = await promiseFavoris.text();
+
+  const Divgauche = document.createElement("div");
+  const Divdroite = document.createElement("div");
 
   // DESCRIPTION -------------------------
   const serieDescription = document.createElement("p");
@@ -96,15 +109,20 @@ async function displaySerie() {
   }
 
   // mise des éléments dans le DOM
-  serieArticle.appendChild(serieTitle);
-  serieArticle.appendChild(serieImage);
-  serieArticle.appendChild(serieDescription);
-  serieArticle.appendChild(serieGenres);
-  serieArticle.appendChild(serieDate);
-  serieArticle.appendChild(serieSeasons);
-  serieArticle.appendChild(serieDirector);
-  serieArticle.appendChild(serieCountries);
-  serieArticle.appendChild(serieCast);
+  titleDiv.appendChild(serieTitle);
+  Divgauche.appendChild(serieImage);
+  Divgauche.innerHTML += responseButton;
+
+  Divgauche.appendChild(serieDescription);
+  Divdroite.appendChild(serieGenres);
+  Divdroite.appendChild(serieDate);
+  Divdroite.appendChild(serieSeasons);
+  Divdroite.appendChild(serieDirector);
+  Divdroite.appendChild(serieCountries);
+  Divdroite.appendChild(serieCast);
+
+  serieArticle.appendChild(Divgauche);
+  serieArticle.appendChild(Divdroite);
 }
 
 async function displaySimilarSeries() {
@@ -357,6 +375,24 @@ function replyToComment(idcomment) {
   });
 }
 
+async function toggleFavorite(id, state) {
+  let data = new FormData();
+  data.append("type", "tv");
+  data.append("id_type", id);
+  data.append("state", state);
+  const promise = await fetch("/cinetech/favorite", {
+    method: "POST",
+    body: data,
+  });
+  const response = await promise.json();
+  if (response.error) {
+    alert(response.error);
+  } else if (response.success) {
+    window.location.reload();
+    alert(response.success);
+  }
+}
+
 // call the functions
 displaySerie();
 displaySimilarSeries();
@@ -377,5 +413,17 @@ formAddComment.addEventListener("submit", function (event) {
     return;
   } else {
     addComment(this);
+  }
+});
+
+serieArticle.addEventListener("click", function (event) {
+  if (event.target.classList.contains("addFav")) {
+    const id = serieId;
+    const state = "add";
+    toggleFavorite(id, state);
+  } else if (event.target.classList.contains("deleteFav")) {
+    const id = serieId;
+    const state = "remove";
+    toggleFavorite(id, state);
   }
 });
