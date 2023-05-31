@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- CSS -->
     <link rel="stylesheet" href="/cinetech/style.css">
+    <link rel="icon" type="images/png" sizes="64x64" href="img/Logo_onglet.png" />
     <!-- Fontawesome -->
     <script src="https://kit.fontawesome.com/1a481da37a.js" crossorigin="anonymous"></script>
     <!-- JS -->
@@ -36,6 +37,9 @@
         </article>
     </main>
 
+    <footer>
+        <?php require_once 'includes/footer.php'; ?>
+    </footer>
 
 </body>
 
